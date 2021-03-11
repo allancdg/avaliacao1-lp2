@@ -11,6 +11,12 @@ public class compradores {
 	private List<Double> compras = new ArrayList<>(); /*Mudar para List<produtos> e,
 	caso necessário, receber os valores através do produto comprado*/
 	
+	public compradores() {} //Construtor padrão
+	public compradores(String nome, String cpf) { //Construtor parametrizado
+		this.nome = nome;
+		this.cpf = cpf;
+		this.saldo_conta = 0.0;
+	}
 	
 	//Getters
 	public String getNome() {

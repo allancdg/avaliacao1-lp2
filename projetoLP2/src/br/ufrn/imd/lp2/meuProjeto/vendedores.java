@@ -12,6 +12,13 @@ public class vendedores {
 	caso necessário, receber os valores através do produto vendido*/
 	private List<produtos> catalogo_produtos = new ArrayList<>();	
 	
+	public vendedores() {}	//Construtor padrão
+	public vendedores(String nome, String cnpj) { //Construtor parametrizado
+		this.nome = nome;
+		this.cnpj = cnpj;
+		this.saldo_conta = 0.0;
+	}
+	
 	//Getters
 	public String getNome() {
 		return nome;
@@ -33,5 +40,5 @@ public class vendedores {
 	}	
 	
 	//Setters
-		
+	
 }

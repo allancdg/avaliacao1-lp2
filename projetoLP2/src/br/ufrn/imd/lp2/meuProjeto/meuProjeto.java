@@ -5,5 +5,7 @@ package br.ufrn.imd.lp2.meuProjeto;
 public class meuProjeto {
 	public static void main (String[] args) {
 		//Scanner entrada = new Scanner(System.in);
+		cadastramento cadastramento = new cadastramento();
+		cadastramento.cadastrar();
 	}
 }
