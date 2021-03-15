@@ -9,10 +9,10 @@ public class vendedores {
 	private String nome;
 	private String cnpj;
 	private double saldo_conta;
-	private List<Double> valores_receber = new ArrayList<>();
-	private List<Double> vendas = new ArrayList<>();/*Mudar para List<produtos> e,
+	private ArrayList<Double> valores_receber = new ArrayList<>();
+	private ArrayList<Double> vendas = new ArrayList<>();/*Mudar para List<produtos> e,
 	caso necessário, receber os valores através do produto vendido*/
-	private List<produtos> catalogo_produtos = new ArrayList<>();	
+	private ArrayList<produtos> catalogo_produtos = new ArrayList<>();	
 	
 	public vendedores() {}	//Construtor padrão
 	public vendedores(String nome, String cnpj) { //Construtor parametrizado
@@ -48,10 +48,8 @@ public class vendedores {
 		Scanner entrada = new Scanner(System.in);
 		System.out.println("CADASTRAMENTO DE VENDEDOR");
 		System.out.println("NOME: ");
-		entrada.nextLine(); // Limpando buffer do teclado
 		nome = entrada.nextLine();
 		System.out.println("CNPJ: ");
-		entrada.nextLine(); // Limpando buffer do teclado
 		cnpj = entrada.nextLine();
 		
 		vendedores vendedor = new vendedores(nome, cnpj);
@@ -59,7 +57,19 @@ public class vendedores {
 		return vendedor;
 	}
 	
-	public void operar(){
+	public void menu(){
+		Scanner entrada = new Scanner(System.in);
+		int opcao;
+		System.out.println("MENU OPERACIONAL DO VENDEDOR " + nome);
+		System.out.println("1 - CADASTRAR PRODUTOS");
+		System.out.println("2 - INFORMAÇÕES COMPLETAS");
+		System.out.println("3... - VOLTAR");
+		opcao = entrada.nextInt();
 		
+		if(opcao == 1) {
+			produtos novo_produto = new produtos();
+			catalogo_produtos.add(novo_produto.cadastrar());
+		}		
+		entrada.close();
 	}
 }

@@ -13,10 +13,10 @@ public class compradores {
 	caso necessário, receber os valores através do produto comprado*/
 	
 	public compradores() {} //Construtor padrão
-	public compradores(String nome, String cpf) { //Construtor parametrizado
+	public compradores(String nome, String cpf, double saldo_conta) { //Construtor parametrizado
 		this.nome = nome;
 		this.cpf = cpf;
-		this.saldo_conta = 0.0;
+		this.saldo_conta = saldo_conta;
 	}
 	
 	//Setters
@@ -43,18 +43,18 @@ public class compradores {
 		Scanner entrada = new Scanner(System.in);
 		System.out.println("CADASTRAMENTO DE COMPRADOR");
 		System.out.println("NOME: ");
-		entrada.nextLine(); // Limpando buffer do teclado
 		nome = entrada.nextLine();
 		System.out.println("CPF: ");
-		entrada.nextLine(); // Limpando buffer do teclado
 		cpf = entrada.nextLine();
+		System.out.println("SALDO INICIAL: ");
+		saldo_conta = entrada.nextDouble();
 		
-		compradores comprador = new compradores(nome, cpf);
+		compradores comprador = new compradores(nome, cpf, saldo_conta);
 		entrada.close();
 		return comprador;
 	}
 	
-	public void operar(){
+	public void menu(){
 		
 	}
 }

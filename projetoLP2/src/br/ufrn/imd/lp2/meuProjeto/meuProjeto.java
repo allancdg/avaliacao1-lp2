@@ -6,8 +6,6 @@ import java.util.ArrayList;
 public class meuProjeto {
 	public static void main (String[] args) {		
 		int entrada_int_main;													//Variável responsável por receber a opção do Menu Principal
-		int c=0; 																//contador para quantidade de compradores cadastrados
-		int v=0; 																//contador para quantidade de vendedores cadastrados
 		ArrayList<vendedores> vendedor = new ArrayList<>();						//Vector de vendedores (todos os vendedores cadastrados)	-> Modificar para vendedores[] vendedor = new vendedores[10];
 		ArrayList<compradores> comprador = new ArrayList<>();					//Vector de compradores (todos os compradores cadastrados) 	-> Modificar para compradores[] comprador = new compradores[10];
 		
@@ -38,15 +36,21 @@ public class meuProjeto {
 				System.out.println("DIGITE O NÚMERO DO COMPRADOR A OPERAR: " );
 				entrada_int_compradores = entrada.nextInt();
 					
-				comprador.get(entrada_int_compradores).operar();
+				comprador.get(entrada_int_compradores).menu();
 					
 				//return to default value before if^2
 				entrada_int_compradores = 1;
 					
 			}
 			else if(entrada_int_compradores == 2) {
-				comprador.add(comprador.get(c).cadastrar());
-				c++;
+				compradores novo_comprador = new compradores();
+				comprador.add(novo_comprador.cadastrar());
+				
+				for(int count=0; count < comprador.size()-1; count ++){			//For para checar se há algum comprador com o mesmo CPF
+					if(novo_comprador.getCpf() == comprador.get(count).getCpf()){
+						comprador.remove(novo_comprador);
+					}
+				}
 			}
 			else if(entrada_int_compradores == 3){
 				System.out.println("LISTAGEM DE COMPRADORES CADASTRADOS: "); 
@@ -84,15 +88,21 @@ public class meuProjeto {
 				System.out.println("DIGITE O NÚMERO DO COMPRADOR A OPERAR: " );
 				entrada_int_vendedores = entrada.nextInt();
 					
-				vendedor.get(entrada_int_vendedores).operar();
+				vendedor.get(entrada_int_vendedores).menu();
 					
 				//return to default value before if^2
 				entrada_int_vendedores = 1;
 					
 			}
 			else if(entrada_int_vendedores == 2) {
-				vendedor.add(vendedor.get(v).cadastrar());
-				v++;
+				vendedores novo_vendedor = new vendedores();
+				vendedor.add(novo_vendedor.cadastrar());
+				
+				for(int count=0; count < vendedor.size()-1; count ++) {			//For para checar se há algum vendedor com o mesmo CNPJ
+					if(novo_vendedor.getCnpj() == vendedor.get(count).getCnpj()){
+						vendedor.remove(novo_vendedor);
+					}
+				}
 			}
 			else if(entrada_int_vendedores == 3){
 				System.out.println("LISTAGEM DE COMPRADORES CADASTRADOS: "); 
