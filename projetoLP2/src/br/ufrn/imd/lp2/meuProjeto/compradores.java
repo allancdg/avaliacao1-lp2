@@ -2,6 +2,7 @@ package br.ufrn.imd.lp2.meuProjeto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class compradores {
 	private String nome;
@@ -18,6 +19,9 @@ public class compradores {
 		this.saldo_conta = 0.0;
 	}
 	
+	//Setters
+	//----
+		
 	//Getters
 	public String getNome() {
 		return nome;
@@ -33,8 +37,24 @@ public class compradores {
 	}	
 	public List<Double> getCompras() {
 		return compras;
+	}	
+
+	public compradores cadastrar() {
+		Scanner entrada = new Scanner(System.in);
+		System.out.println("CADASTRAMENTO DE COMPRADOR");
+		System.out.println("NOME: ");
+		entrada.nextLine(); // Limpando buffer do teclado
+		nome = entrada.nextLine();
+		System.out.println("CPF: ");
+		entrada.nextLine(); // Limpando buffer do teclado
+		cpf = entrada.nextLine();
+		
+		compradores comprador = new compradores(nome, cpf);
+		entrada.close();
+		return comprador;
 	}
 	
-	//Setters
-	
+	public void operar(){
+		
+	}
 }

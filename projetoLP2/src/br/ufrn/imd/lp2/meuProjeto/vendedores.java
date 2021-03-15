@@ -1,9 +1,11 @@
 package br.ufrn.imd.lp2.meuProjeto;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class vendedores {
+	
 	private String nome;
 	private String cnpj;
 	private double saldo_conta;
@@ -18,6 +20,9 @@ public class vendedores {
 		this.cnpj = cnpj;
 		this.saldo_conta = 0.0;
 	}
+	
+	//Setters
+	//---
 	
 	//Getters
 	public String getNome() {
@@ -39,6 +44,22 @@ public class vendedores {
 		return catalogo_produtos;
 	}	
 	
-	//Setters
+	public vendedores cadastrar() {
+		Scanner entrada = new Scanner(System.in);
+		System.out.println("CADASTRAMENTO DE VENDEDOR");
+		System.out.println("NOME: ");
+		entrada.nextLine(); // Limpando buffer do teclado
+		nome = entrada.nextLine();
+		System.out.println("CNPJ: ");
+		entrada.nextLine(); // Limpando buffer do teclado
+		cnpj = entrada.nextLine();
+		
+		vendedores vendedor = new vendedores(nome, cnpj);
+		entrada.close();
+		return vendedor;
+	}
 	
+	public void operar(){
+		
+	}
 }
