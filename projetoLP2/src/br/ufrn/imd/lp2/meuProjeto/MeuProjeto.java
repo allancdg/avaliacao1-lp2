@@ -12,12 +12,13 @@ public class MeuProjeto {
 		int entrada_int_compradores=0;
 		int entrada_int_main=0;											//Variavel responsavel por receber a opcao do Menu Principal
 		Set<Comprador> compradores = new HashSet<>();					
-		//Set<Vendedor> vendedores = new HashSet<>();						
+		Set<Vendedor> vendedores = new HashSet<>();						
 		
 		//INSERÇAO DE OBJETOS PARA TESTES
 		Comprador andre = new Comprador("ANDRE TRIGUEIRO", "111.222.333-44", 10000.00);
-		//Vendedor allan = new Vendedor("ALLAN CHRISTIAN", "222.333.444-55", 20000.00);
+		Vendedor allan = new Vendedor("ALLAN CHRISTIAN", "12.345.678./0001-00", 20000.00);
 		compradores.add(andre);
+		vendedores.add(allan);
 		
 		while(entrada_int_main < 5){
 			//INICIO do Menu Principal
@@ -37,15 +38,13 @@ public class MeuProjeto {
 			//INICIO do Menu de Compradores
 			entrada_int_compradores = 0;
 			if(entrada_int_main == 1) {	
-				while(entrada_int_compradores < 7){
+				while(entrada_int_compradores < 5){
 					System.out.println("MENU PRINCIPAL COMPRADORES");					
 					System.out.println("1 - CADASTRAR NOVO COMPRADOR");
 					System.out.println("2 - APAGAR COMPRADOR");
 					System.out.println("3 - LISTAR TODOS OS COMPRADORES");
 					System.out.println("4 - BUSCAR POR CPF");
-					System.out.println("5 - LISTAR COMPRAS REALIZADAS");
-					System.out.println("6 - VALORES A PAGAR");
-					System.out.println("7... - VOLTAR");
+					System.out.println("5... - VOLTAR");
 					System.out.println("DIGITE A OPCAO DESEJADA: ");
 					entrada_int_compradores = entrada.nextInt();
 					entrada.nextLine();
@@ -132,86 +131,89 @@ public class MeuProjeto {
 				}
 			}
 			
-	//		else if(entrada_int_main == 2) {
-		//		while(entrada_int_compradores < 8){
-		//			//INICIO do Menu de Vendedores
-		//			System.out.println("MENU PRINCIPAL VENDEDORES");					
-		//			System.out.println("1 - CADASTRAR NOVO VENDEDOR");
-		//			System.out.println("2 - APAGAR VENDEDOR");
-		//			System.out.println("3 - LISTAR TODOS OS VENDEDOR");
-		//			System.out.println("4 - BUSCAR POR CPF");
-		//			System.out.println("5 - LISTAR VENDAS REALIZADAS");
-		//			System.out.println("6 - VALORES A RECEBER");
-		//			System.out.println("7 - CATALOGO DE PRODUTOS");
-		//			System.out.println("8... - VOLTAR");
-		//			System.out.println("DIGITE A OPÇAO DESEJADA: ");
-		//			entrada_int_vendedores = entrada.nextInt();		
-		//			entrada.nextLine();
-		//			//FIM do Menu de Vendedores
-		//			
-		//			if(entrada_int_vendedores == 1) {
-		//				Vendedor novo_vendedor = new Vendedor();
-		//				vendedores.add(novo_vendedor.cadastrar());
-		//				
-		//				for(Vendedor vendedor_aux : vendedores) {
-		//					vendedor_aux.equals(novo_vendedor);
-		//				}
-		//			}
-		//
-		//			if(entrada_int_vendedores == 2){
-		//				System.out.println("LISTAGEM DE VENDEDORES CADASTRADOS: ");
-		//				for(Vendedor vendedor_aux : vendedores){
-		//					System.out.println(vendedor_aux.toString());
-		//					System.out.println(" ");
-		//				}
-		//					
-		//				System.out.println("DIGITE O CPF DO VENDEDOR A APAGAR: " );
-		//				entrada_int_vendedores = entrada.nextInt();				
-		//				compradores.remove(entrada_int_vendedores);
-		//				
-		//				//return to default value before if^2
-		//				entrada_int_vendedores = 2;
-		//			}
-		//
-		//			if(entrada_int_vendedores == 3) {
-		//				System.out.println("LISTAGEM DE COMPRADORES CADASTRADOS: ");
-		//				for(Vendedor vendedor_aux : vendedores){
-		//					System.out.println(vendedor_aux.toString());
-		//					System.out.println(" ");
-		//				}
-		//			}
-		//			
-		//			if(entrada_int_vendedores == 4){
-		//				System.out.println("FORMATO DE BUSCA -> 12.345.678./0001-00 ");
-		//				System.out.println("DIGITE O CNPJ QUE DESEJA BUSCAR: ");
-		//				String entrada_string_vendedores;
-		//				entrada_string_vendedores = entrada.nextLine();
-		//				
-		//				for(int count=0; count < vendedor.size(); count ++){
-		//					if(vendedor.get(count).getCnpj() == entrada_string_vendedores){
-		//						vendedor.get(count).show_info(); 
-		//					}
-		//				}
-		//			}
-		//			
-		//			if(entrada_int_vendedores == 5){
-		//				System.out.println("LISTAGEM DE VENDEDORES CADASTRADOS: ");
-		//				System.out.println("ID / NOME / CNPJ / SALDO");
-		//				for(int count=0; count < vendedor.size(); count ++){
-		//					System.out.println(count);
-		//					vendedor.get(count).show_info(); 
-		//				}
-		//				System.out.println("DIGITE O N�MERO DO VENDEDOR A OPERAR: " );
-		//				entrada_int_vendedores = entrada.nextInt();
-		//				
-		//				vendedor.get(entrada_int_vendedores).menu();
-		//												
-		//				//return to default value before if^2
-		//				entrada_int_vendedores = 5;
-		//			}
-		//		}
-	//		}	//FIM das opcoes do Menu de VendedoreS			
-		}
-		entrada.close();														//Fecha a funcao Scanner entrada
+			else if(entrada_int_main == 2) {
+				while(entrada_int_compradores < 8){
+					//INICIO do Menu de Vendedores
+					System.out.println("MENU PRINCIPAL VENDEDORES");					
+					System.out.println("1 - CADASTRAR NOVO VENDEDOR");
+					System.out.println("2 - APAGAR VENDEDOR");
+					System.out.println("3 - LISTAR TODOS OS VENDEDORES");
+					System.out.println("4 - BUSCAR POR CNPJ");
+					System.out.println("5... - VOLTAR");
+					System.out.println("DIGITE A OPÇAO DESEJADA: ");
+					entrada_int_vendedores = entrada.nextInt();		
+					entrada.nextLine();
+					//FIM do Menu de Vendedores
+					
+					if(entrada_int_vendedores == 1) {
+						Vendedor novo_vendedor = new Vendedor();
+						novo_vendedor = novo_vendedor.cadastrar();
+						
+						boolean teste_duplicado = false;
+						
+						for(Vendedor vendedor_aux : vendedores) {
+							if(vendedor_aux.equals(novo_vendedor)) {
+								teste_duplicado = true;
+							}
+						}
+						
+						if (teste_duplicado) {
+							System.out.println("O CPF informado ja esta cadastrado.");
+						}
+						else {
+							vendedores.add(novo_vendedor);
+						}
+					}
+		
+					if(entrada_int_vendedores == 2){
+						System.out.println("LISTAGEM DE VENDEDORES CADASTRADOS: ");
+						for(Vendedor vendedor_aux : vendedores){
+							System.out.println(vendedor_aux.toString());
+							System.out.println(" ");
+						}
+							
+						System.out.println("DIGITE O CPF DO VENDEDOR A APAGAR: " );
+						String entrada_CNPJ_vendedores;
+						entrada_CNPJ_vendedores = entrada.nextLine();				
+						for(Vendedor vendedor_aux : vendedores){
+							if(vendedor_aux.getCNPJ().equals(entrada_CNPJ_vendedores)){
+								vendedores.remove(vendedor_aux);
+								System.out.println("Comprador deletado!");
+							}
+						}								
+						//return to default value before if^2
+						entrada_int_vendedores = 2;
+					}	
+		
+					if(entrada_int_vendedores == 3) {
+						System.out.println("LISTAGEM DE VENDEDORES CADASTRADOS: ");
+						for(Vendedor vendedor_aux : vendedores){
+							System.out.println(vendedor_aux.toString());
+							System.out.println(" ");
+						}
+					}
+					
+					if(entrada_int_vendedores == 4){
+						System.out.println("FORMATO DE BUSCA -> 12.345.678./0001-00 ");
+						System.out.println("DIGITE O CNPJ QUE DESEJA BUSCAR: ");
+						String entrada_string_vendedores;
+						entrada_string_vendedores = entrada.nextLine();
+						
+						boolean teste = true;
+						for(Vendedor vendedor_aux : vendedores){
+							if(vendedor_aux.getCNPJ().equals(entrada_string_vendedores)){
+								System.out.println("CNPJ ENCONTRADO. INFORMAÇOES: ");
+								System.out.println(vendedor_aux.toString());
+								teste = false;
+							}
+						}						
+						if (teste) { 
+							System.out.println("Este CPF nao foi encontrado.");
+						}
+					}		
+				}//FIM do While de leitura Vendedores			
+			}//FIM do Menu Vendedores
+			entrada.close(); //Fecha a funcao Scanner entrada													
+		}//FIM do While de leitura Principal
 	}
 }

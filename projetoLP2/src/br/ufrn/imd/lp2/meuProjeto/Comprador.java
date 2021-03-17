@@ -5,18 +5,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Comprador extends Pessoa {
+	private String CPF;
 	private Set<Double> valores_pagar = new HashSet<>();			
 	private Set<Produto> compras_realizadas = new HashSet<>(); 			
 	
 	public Comprador() {} //Construtor padrao
 	public Comprador(String nome, String CPF, double saldo_conta) { //Construtor parametrizado
-		super(nome, CPF, saldo_conta);
+		super(nome, saldo_conta);
+		this.CPF = CPF;
 	}
 	
 	//Setters
 	//----
 		
 	//Getters
+	
+	public String getCPF() {
+		return CPF;
+	}
 	public Set<Double> getValores_pagar() {
 		return valores_pagar;
 	}	
@@ -29,7 +35,7 @@ public class Comprador extends Pessoa {
 	//Metodo para mostrar informaçoes
 	public String toString() { 
 		String retorno = "Nome: " + super.nome;
-		retorno += "\n CPF: " + super.CPF;
+		retorno += "\n CPF: " + this.CPF;
 		retorno += "\nSaldo em conta: " + super.saldo_conta;
 		return retorno;
 	}
