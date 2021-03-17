@@ -49,7 +49,7 @@ public class Comprador extends Pessoa {
 	}
 	//FIM dos auxiliares
 	  
-	//INICIO Funções de Menus
+	//INICIO Funcoes de Menus
 	//Menu de cadastramento
 	public Comprador cadastrar() {
 		Scanner entrada = new Scanner(System.in);
@@ -59,7 +59,8 @@ public class Comprador extends Pessoa {
 		System.out.println("CPF: ");
 		String CPF_aux = entrada.nextLine();
 		System.out.println("SALDO INICIAL: ");
-		double saldo_conta_aux = entrada.nextDouble();
+		double saldo_conta_aux;
+		saldo_conta_aux = entrada.nextDouble();
 
 		Comprador comprador = new Comprador(nome_aux, CPF_aux, saldo_conta_aux);
 		entrada.close();
@@ -72,7 +73,7 @@ public class Comprador extends Pessoa {
 		Scanner entrada = new Scanner(System.in);
 		int opcao;
 		System.out.println("MENU OPERACIONAL DO COMPRADOR " + getNome()) ;
-		System.out.println("1 - INFORMAÇOES DO COMPRADOR");
+		System.out.println("1 - INFORMACOES DO COMPRADOR");
 		System.out.println("2 - LISTAR VALORES A PAGAR");
 		System.out.println("3 - LISTAR COMPRAS REALIZADAS");
 		System.out.println("4 - VOLTAR");

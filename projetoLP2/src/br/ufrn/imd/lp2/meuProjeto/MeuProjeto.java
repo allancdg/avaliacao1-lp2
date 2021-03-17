@@ -84,7 +84,7 @@ public class MeuProjeto {
 						entrada_CPF_comprador = entrada.nextLine();	
 										
 						for(Comprador comprador_aux : compradores){
-							if(comprador_aux.getCPF() == entrada_CPF_comprador) {
+							if(comprador_aux.getCPF().equals(entrada_CPF_comprador)){
 								compradores.remove(comprador_aux);
 								System.out.println("Comprador deletado!");
 							}
@@ -106,10 +106,10 @@ public class MeuProjeto {
 						System.out.println("DIGITE O CPF QUE DESEJA BUSCAR: ");
 						String entrada_string_compradores;
 						entrada_string_compradores = entrada.nextLine();
-						
+						System.out.println(entrada_string_compradores);
 						boolean teste = true;
 						for(Comprador comprador_aux : compradores){
-							if(comprador_aux.getCPF() == entrada_string_compradores) {
+							if(comprador_aux.getCPF().equals(entrada_string_compradores)){
 								System.out.println("CPF ENCONTRADO. INFORMAÇOES: ");
 								System.out.println(comprador_aux.toString());
 								teste = false;
