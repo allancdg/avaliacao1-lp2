@@ -28,7 +28,8 @@ public class MeuProjeto {
 			System.out.println("4 - COMPRA/VENDA");
 			System.out.println("5... - SAIR");
 			System.out.println("DIGITE A OPCAO DESEJADA: ");
-			entrada_int_main = entrada.nextInt();									
+			entrada_int_main = entrada.nextInt();
+			entrada.nextLine();
 			//FIM do Menu Principal
 			
 			
@@ -46,8 +47,8 @@ public class MeuProjeto {
 					System.out.println("6 - VALORES A PAGAR");
 					System.out.println("7... - VOLTAR");
 					System.out.println("DIGITE A OPCAO DESEJADA: ");
+					entrada_int_compradores = entrada.nextInt();
 					entrada.nextLine();
-					entrada_int_compradores = entrada.nextInt();				
 				//FIM do Menu de Compradores
 					
 				//INICIO opcoes do Menu Compradores
@@ -80,7 +81,6 @@ public class MeuProjeto {
 						
 						System.out.println("DIGITE O CPF DO COMPRADOR A APAGAR: ");
 						//String entrada_CPF_comprador;
-						entrada.nextLine();
 						entrada_CPF_comprador = entrada.nextLine();	
 										
 						for(Comprador comprador_aux : compradores){
@@ -145,7 +145,8 @@ public class MeuProjeto {
 		//			System.out.println("7 - CATALOGO DE PRODUTOS");
 		//			System.out.println("8... - VOLTAR");
 		//			System.out.println("DIGITE A OPÇAO DESEJADA: ");
-		//			entrada_int_vendedores = entrada.nextInt();							
+		//			entrada_int_vendedores = entrada.nextInt();		
+		//			entrada.nextLine();
 		//			//FIM do Menu de Vendedores
 		//			
 		//			if(entrada_int_vendedores == 1) {
