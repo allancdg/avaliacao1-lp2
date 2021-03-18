@@ -35,7 +35,7 @@ public class Comprador extends Pessoa {
 	//Metodo para mostrar informaçoes
 	public String toString() { 
 		String retorno = "Nome: " + super.nome;
-		retorno += "\n CPF: " + this.CPF;
+		retorno += "\nCPF: " + this.CPF;
 		retorno += "\nSaldo em conta: " + super.saldo_conta;
 		return retorno;
 	}
@@ -59,7 +59,7 @@ public class Comprador extends Pessoa {
 	//Menu de cadastramento
 	public Comprador cadastrar() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("CADASTRAMENTO DE COMPRADOR");
+		System.out.println("#CADASTRAMENTO DE COMPRADOR");
 		System.out.println("NOME: ");
 		String nome_aux = entrada.nextLine();
 		System.out.println("CPF: ");
@@ -69,16 +69,15 @@ public class Comprador extends Pessoa {
 		saldo_conta_aux = entrada.nextDouble();
 
 		Comprador comprador = new Comprador(nome_aux, CPF_aux, saldo_conta_aux);
-		entrada.close();
 
 		return comprador;
 	}
 
 	//Menu de navegaçao
-	public void menu(){
+	public void menu(Comprador comprador){
 		Scanner entrada = new Scanner(System.in);
 		int opcao;
-		System.out.println("MENU OPERACIONAL DO COMPRADOR " + getNome()) ;
+		System.out.println("\n#MENU OPERACIONAL DO COMPRADOR " + getNome()) ;
 		System.out.println("1 - INFORMACOES DO COMPRADOR");
 		System.out.println("2 - LISTAR VALORES A PAGAR");
 		System.out.println("3 - LISTAR COMPRAS REALIZADAS");

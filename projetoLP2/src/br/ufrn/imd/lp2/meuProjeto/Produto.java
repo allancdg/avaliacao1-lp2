@@ -31,15 +31,14 @@ public class Produto {
 	}
 	
 	public Produto cadastrar() {
-		Scanner entrada = new Scanner(System.in);
+		Scanner entrada_produto = new Scanner(System.in);
 		System.out.println("CADASTRAMENTO DE PRODUTO");
 		System.out.println("NOME: ");
-		nome = entrada.nextLine();
-		System.out.println("PRE�O UNIT�RIO: ");
-		preco_unitario = entrada.nextDouble();
+		nome = entrada_produto.nextLine();
+		System.out.println("PREÇO UNITARIO: ");
+		preco_unitario = entrada_produto.nextDouble();
 		
 		Produto novo_produto = new Produto(nome, preco_unitario);
-		entrada.close();
 		return novo_produto;
 	}
 	

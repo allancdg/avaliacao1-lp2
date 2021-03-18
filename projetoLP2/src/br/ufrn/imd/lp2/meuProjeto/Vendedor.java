@@ -33,7 +33,7 @@ public class Vendedor extends Pessoa {
 	//Metodo para mostrar informaçoes
 	public String toString() { 
 		String retorno = "Nome: " + super.nome;
-		retorno += "\n CNPJ: " + this.CNPJ;
+		retorno += "\nCNPJ: " + this.CNPJ;
 		retorno += "\nSaldo em conta: " + super.saldo_conta;
 		return retorno;
 	}
@@ -57,7 +57,7 @@ public class Vendedor extends Pessoa {
 	//Menu de cadastramento
 	public Vendedor cadastrar() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("CADASTRAMENTO DE VENDEDOR");
+		System.out.println("#\nCADASTRAMENTO DE VENDEDOR");
 		System.out.println("NOME: ");
 		String nome_aux = entrada.nextLine();
 		System.out.println("CNPJ: ");
@@ -67,7 +67,6 @@ public class Vendedor extends Pessoa {
 		saldo_conta_aux = entrada.nextDouble();
 
 		Vendedor vendedor = new Vendedor(nome_aux, CNPJ_aux, saldo_conta_aux);
-		entrada.close();
 
 		return vendedor;
 	}
@@ -76,17 +75,18 @@ public class Vendedor extends Pessoa {
 	public void menu(){
 		Scanner entrada = new Scanner(System.in);
 		int opcao;
-		System.out.println("MENU OPERACIONAL DO VENDEDOR " + nome);
+		System.out.println("\n#MENU OPERACIONAL DO VENDEDOR " + nome);
 		System.out.println("1 - INFORMAÇOES DO VENDEDOR");
 		System.out.println("2 - CADASTRAR PRODUTOS");
 		System.out.println("3 - CATALOGO DE PRODUTOS");
 		System.out.println("4 - LISTAR VALORES A RECEBER");
 		System.out.println("5 - LISTAR VENDAS REALIZADAS");
 		System.out.println("6... - VOLTAR");
+		System.out.println("DIGITE A OPÇAO DESEJADA: ");
 		opcao = entrada.nextInt();
 		
 		if(opcao == 1) {
-			
+			toString();
 		}
 		else if(opcao == 2){
 			Produto novo_produto = new Produto();
