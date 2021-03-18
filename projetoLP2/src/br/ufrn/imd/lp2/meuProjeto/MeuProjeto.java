@@ -2,6 +2,8 @@ package br.ufrn.imd.lp2.meuProjeto;
 
 import java.util.Scanner;
 import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class MeuProjeto {
@@ -198,8 +200,10 @@ public class MeuProjeto {
 			else if (entrada_int_main == 3) {
 				String entrada_string_compra_comprador;
 				String entrada_string_venda_vendedor;
+				int entrada_int_menu_pagamento = 0;
 				Comprador comprador_venda = new Comprador();
 				Vendedor vendedor_venda = new Vendedor();
+				boolean teste = true;
 				
 				System.out.println("\t\t>> VENDA <<");
 			
@@ -209,7 +213,6 @@ public class MeuProjeto {
 					System.out.println(" ");
 				}
 				
-				boolean teste = true;
 				// COMEÇO DO | WHILE  -> REPETIÇÃO ENQUANTO NÃO DIGITAR UM CPF QUE LOCALIZE UM COMPRADOR
 				do{
 					System.out.println("DIGITE O CPF REFERENTE AO COMPRADOR DESTA VENDA: ");
@@ -257,19 +260,89 @@ public class MeuProjeto {
 				
 				System.out.println("REALIZANDO COMPRA/VENDA ENTRE:\nComprador: " + comprador_venda.getNome() + "\nVendedor: " + vendedor_venda.getNome());
 				System.out.println(">> CATALOGO DE PRODUTOS <<");
+				int id = 1;
 				for (Produto produto_aux : vendedor_venda.getCatalogo_produtos()) {
-					System.out.println(produto_aux.toString());
+					System.out.println( "ID: " + id + "\n" + produto_aux.toString());
+					id++;
 				}
 				
 				teste = true;
+				List<Produto> produtos_compra = new ArrayList<Produto>();
+				double valor_total=0;
 				// COMEÇO DO PROCESSO DE VENDA
 				do{
+					id = 1;
+					int i=0;
+					int qtd=0;
 					
-					//CONTINUAR COMPRA E VENDA DAQUI ... PARTE DE CIMA ESTÁ OK
-					
+					System.out.println("\nDIGITE O ID DO ITEM A COMPRAR: [0 - PROSSEGUIR PARA PAGAMENTO]");
+					id = Integer.parseInt(entrada.nextLine());
+					if(id != 0) {
+						System.out.println("\nQUANTIDADE: ");
+						qtd = Integer.parseInt(entrada.nextLine());
+						
+						for(i=0; i<qtd; i++) {
+							produtos_compra.add(vendedor_venda.getCatalogo_produtos().get(id-1));
+							valor_total += vendedor_venda.getCatalogo_produtos().get(id-1).getPreco_unitario();
+						}
+					}else { 
+						vendedor_venda.setVendas_realizada(valor_total);	//Armazena o valor da venda no vendedor
+						comprador_venda.setCompras_realizadas(valor_total);	//Armazena o valor da venda no comprador
+						teste = false;
+					}
 				} while (teste == true);
 				// FIM DO PROCESSO DE VENDA
 							
+				// COMECO DO PROCESSO DE PAGAMENTO
+				//IMPRESSAO DOS ITENS SELECIONADOS E VALOR FINAL
+				System.out.println("Extrato: ");
+				for(Produto produto_aux : produtos_compra) {
+					System.out.println( "ID: " + id + "\n" + produto_aux.toString());
+					id++;
+				}
+				System.out.println("\nVALOR FINAL: R$" + valor_total + "\n\n\n");
+				teste = true;
+				do{
+					System.out.println("OPCOES DE PAGAMENTO:\n1 - PIX\n2 - BOLETO\n3 - DEBITO\n4 - CREDITO\n0 - CANCELAMENTO DA COMPRA\nESCOLHA A OPCAO DE PAGAMENTO: ");
+					entrada_int_menu_pagamento = Integer.parseInt(entrada.nextLine());
+					
+					if(entrada_int_menu_pagamento == 1) {
+						if(vendedor_venda.getSaldo() - valor_total >= 0) {
+							comprador_venda.setSaldo(vendedor_venda.getSaldo() - valor_total);
+							vendedor_venda.setSaldo(vendedor_venda.getSaldo()+valor_total);
+						}						
+						System.out.println("\nPAGAMENTO REALIZADO VIA PIX\n");
+						teste = false;					
+					}
+					
+					else if(entrada_int_menu_pagamento == 2) {
+						//A SER IMPLEMENTADO
+						System.out.println("\nSISTEMA DE BOLETO ESTÁ FORA DO AR!\n");
+					}
+					
+					else if(entrada_int_menu_pagamento == 3) {
+						if(vendedor_venda.getSaldo() - valor_total >= 0) {
+							comprador_venda.setSaldo(comprador_venda.getSaldo() - valor_total);
+							vendedor_venda.setSaldo(vendedor_venda.getSaldo()+valor_total*0.97);
+						}						
+						System.out.println("\nPAGAMENTO REALIZADO VIA DÉBITO\nTAXA DO CARTÃO: 3%\nVALOR DO CARTÃO: R$" + valor_total*0.97);
+						teste = false;	
+					}
+					
+					else if(entrada_int_menu_pagamento == 4) {
+						comprador_venda.setValores_pagar(valor_total);
+						vendedor_venda.setValores_receber(valor_total*0.95);											
+						System.out.println("\nPAGAMENTO REALIZADO VIA CREDITO\nTAXA DO CARTÃO: 5%\nVALOR DO CARTÃO: R$" + valor_total*0.95);
+						teste = false;	
+					}
+					
+					else if(entrada_int_menu_pagamento == 0) {
+						teste = false;
+					}
+					
+					else { System.out.println("\nOPCAO INVALIDA!\n"); }
+					
+				} while(teste == true);
 			}
 			//MENU SECUNDARIO - NUMERO INFORMADO NAO CORRESPONDE A NENHUMA OPCAO
 		} while (entrada_int_main != 0); // FIM DO MENU PRINCIPAL

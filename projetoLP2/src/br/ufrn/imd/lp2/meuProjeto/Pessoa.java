@@ -10,6 +10,12 @@ public class Pessoa {
 		this.saldo_conta = saldo_conta;
 	}
 	
+	//Setters
+	public void setSaldo(double valor){
+		this.saldo_conta = valor;
+	}
+	
+	//Getters
 	public String getNome() {
 		return nome;
 	}

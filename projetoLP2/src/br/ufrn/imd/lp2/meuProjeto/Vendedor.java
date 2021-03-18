@@ -9,7 +9,7 @@ import java.util.List;
 public class Vendedor extends Pessoa {
 	private String CNPJ;
 	private Set<Double> valores_receber = new HashSet<>();
-	private Set<Produto> vendas_realizadas = new HashSet<>(); 			
+	private Set<Double> vendas_realizadas = new HashSet<>(); 			
 	private List<Produto> catalogo_produtos = new ArrayList<Produto>(); 			
 	
 	public Vendedor() {} //Construtor padrao
@@ -19,14 +19,25 @@ public class Vendedor extends Pessoa {
 	}
 	
 	//Setters
-	//---
+	public void setVendas_realizada(double valor){
+		this.vendas_realizadas.add(valor);
+	}
+	
+	public void setValores_receber(double valor) {
+		this.valores_receber.add(valor);
+	}
 	
 	//Getters
 	public String getCNPJ() {
 		return CNPJ;
 	}
+	
 	public Set<Double> getValores_receber() {
 		return valores_receber;
+	}
+	
+	public Set<Double> getVendas_realizadas() {
+		return vendas_realizadas;
 	}
 	
 	public List<Produto> getCatalogo_produtos(){

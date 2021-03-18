@@ -7,7 +7,7 @@ import java.util.Set;
 public class Comprador extends Pessoa {
 	private String CPF;
 	private Set<Double> valores_pagar = new HashSet<>();			
-	private Set<Produto> compras_realizadas = new HashSet<>(); 			
+	private Set<Double> compras_realizadas = new HashSet<>(); 			
 	
 	public Comprador() {} //Construtor padrao
 	public Comprador(String nome, String CPF, double saldo_conta) { //Construtor parametrizado
@@ -16,7 +16,13 @@ public class Comprador extends Pessoa {
 	}
 	
 	//Setters
-	//----
+	public void setValores_pagar(double valor){
+		this.valores_pagar.add(valor);
+	}
+	
+	public void setCompras_realizadas(double valor){
+		this.compras_realizadas.add(valor);
+	}
 		
 	//Getters
 	
@@ -26,7 +32,7 @@ public class Comprador extends Pessoa {
 	public Set<Double> getValores_pagar() {
 		return valores_pagar;
 	}	
-	public Set<Produto> getCompras_realizadas() {
+	public Set<Double> getCompras_realizadas() {
 		return compras_realizadas;
 	}	
 
@@ -99,8 +105,8 @@ public class Comprador extends Pessoa {
 		}
 		else if(opcao == 3){
 			System.out.println("COMPRAS REALIZADAS: ");
-			for(Produto produtos_comprados: this.compras_realizadas){
-				System.out.println(produtos_comprados.toString());
+			for(double compras: this.compras_realizadas){
+				System.out.println("R$" + compras);
 			}
 		}		
 		//entrada.close();
