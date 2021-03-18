@@ -83,6 +83,7 @@ public class Comprador extends Pessoa {
 		System.out.println("3 - LISTAR COMPRAS REALIZADAS");
 		System.out.println("4 - VOLTAR");
 		opcao = entrada.nextInt();
+		entrada.nextLine(); //Limpeza de buffer
 		
 		if(opcao == 1) {
 			System.out.println(toString());
@@ -102,7 +103,7 @@ public class Comprador extends Pessoa {
 				System.out.println(produtos_comprados.toString());
 			}
 		}		
-		entrada.close();
+		//entrada.close();
 	}
 	//Fim dos menus
 }

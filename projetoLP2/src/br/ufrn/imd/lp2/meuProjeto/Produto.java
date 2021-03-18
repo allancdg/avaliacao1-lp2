@@ -26,7 +26,7 @@ public class Produto {
 	//Metodo para mostrar informaçoes
 	public String toString() { 
 		String retorno = "Nome: " + this.nome;
-		retorno += "\nPreço Unitario: " + this.preco_unitario;
+		retorno += "\nPreco Unitario: R$" + this.preco_unitario;
 		return retorno;
 	}
 	
@@ -35,7 +35,7 @@ public class Produto {
 		System.out.println("CADASTRAMENTO DE PRODUTO");
 		System.out.println("NOME: ");
 		nome = entrada_produto.nextLine();
-		System.out.println("PREÇO UNITARIO: ");
+		System.out.println("PRECO UNITARIO: ");
 		preco_unitario = entrada_produto.nextDouble();
 		
 		Produto novo_produto = new Produto(nome, preco_unitario);

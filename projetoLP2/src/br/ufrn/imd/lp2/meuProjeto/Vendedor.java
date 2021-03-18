@@ -29,6 +29,10 @@ public class Vendedor extends Pessoa {
 		return valores_receber;
 	}
 	
+	public List<Produto> getCatalogo_produtos(){
+		return catalogo_produtos;
+	}
+	
 	//INICIO Metodos auxiliares
 	//Metodo para mostrar informaçoes
 	public String toString() { 
@@ -71,48 +75,56 @@ public class Vendedor extends Pessoa {
 		return vendedor;
 	}
 	
-	//Menu de navegaçao
+	//Menu de navegacao
 	public void menu(){
 		Scanner entrada = new Scanner(System.in);
 		int opcao;
-		System.out.println("\n#MENU OPERACIONAL DO VENDEDOR " + nome);
-		System.out.println("1 - INFORMAÇOES DO VENDEDOR");
-		System.out.println("2 - CADASTRAR PRODUTOS");
-		System.out.println("3 - CATALOGO DE PRODUTOS");
-		System.out.println("4 - LISTAR VALORES A RECEBER");
-		System.out.println("5 - LISTAR VENDAS REALIZADAS");
-		System.out.println("6... - VOLTAR");
-		System.out.println("DIGITE A OPÇAO DESEJADA: ");
-		opcao = entrada.nextInt();
-		
-		if(opcao == 1) {
-			toString();
-		}
-		else if(opcao == 2){
-			Produto novo_produto = new Produto();
-			catalogo_produtos.add(novo_produto.cadastrar());
-		}
-		else if(opcao == 3){
-			System.out.println("CATALOGO DE PRODUTOS");
-			for (Produto produto_aux : catalogo_produtos) {
-				System.out.println(produto_aux.toString());
+		do{
+			System.out.println("\n#MENU OPERACIONAL DO VENDEDOR " + nome);
+			System.out.println("1 - INFORMACOES DO VENDEDOR");
+			System.out.println("2 - CADASTRAR PRODUTOS");
+			System.out.println("3 - CATALOGO DE PRODUTOS");
+			System.out.println("4 - LISTAR VALORES A RECEBER");
+			System.out.println("5 - LISTAR VENDAS REALIZADAS");
+			System.out.println("6 - VOLTAR");
+			System.out.println("DIGITE A OPCAO DESEJADA: ");
+			opcao = entrada.nextInt();
+			
+			if(opcao == 1) {
+				toString();
 			}
-		}
-		else if(opcao == 4){
-			double soma_valores_receber = 0.0;
-			System.out.println("VALORES A RECEBER: ");
-			for(int count=0; count < valores_receber.size(); count ++){
-//				System.out.println("R$"+valores_receber.get(count));
-//				soma_valores_receber += valores_receber.get(count);
+			
+			else if(opcao == 2){
+				Produto novo_produto = new Produto();
+				catalogo_produtos.add(novo_produto.cadastrar());
 			}
-			System.out.println("Total: R$"+ soma_valores_receber);
-		}
-		else if(opcao == 5){
-			System.out.println("VENDAS REALIZADAS: ");
-//			for(int count=0; count < vendas.size(); count ++){
-//				System.out.println("Item: " + vendas.get(count).getNome() + "; R$" + vendas.get(count).getPreco_unitario());
-//			}
-		}
-		entrada.close();
+			
+			else if(opcao == 3){
+				System.out.println("CATALOGO DE PRODUTOS");
+				for (Produto produto_aux : catalogo_produtos) {
+					System.out.println(produto_aux.toString() + "\n");					
+				}
+			}
+			
+			else if(opcao == 4){
+				double soma_valores_receber = 0.0;
+				System.out.println("VALORES A RECEBER: ");
+//				for(int count=0; count < valores_receber.size(); count ++){
+//					System.out.println("R$"+valores_receber.get(count));
+//					soma_valores_receber += valores_receber.get(count);
+//				}
+//				System.out.println("Total: R$"+ soma_valores_receber);
+			}
+			
+			else if(opcao == 5){
+				System.out.println("VENDAS REALIZADAS: ");
+//				for(int count=0; count < vendas.size(); count ++){
+//					System.out.println("Item: " + vendas.get(count).getNome() + "; R$" + vendas.get(count).getPreco_unitario());
+//				}
+			}
+			
+			else if(opcao == 6){ }
+			else {System.out.println("OPCAO INVALIDA! ");}
+		}while(opcao != 6);
 	}
 }
