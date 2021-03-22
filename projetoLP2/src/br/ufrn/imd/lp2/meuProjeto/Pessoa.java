@@ -9,6 +9,10 @@ public class Pessoa {
 		this.nome = nome;
 		this.saldo_conta = saldo_conta;
 	}
+	public Pessoa(String nome){
+		this.nome = nome;
+		this.saldo_conta = 0;
+	}
 	
 	//Setters
 	public void setSaldo(double valor){

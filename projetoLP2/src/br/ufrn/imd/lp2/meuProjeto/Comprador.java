@@ -14,6 +14,10 @@ public class Comprador extends Pessoa {
 		super(nome, saldo_conta);
 		this.CPF = CPF;
 	}
+	public Comprador(String nome, String CPF){
+		super(nome);
+		this.CPF = CPF;
+	}
 	
 	//Setters
 	public void setValores_pagar(double valor){

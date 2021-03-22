@@ -17,6 +17,10 @@ public class Vendedor extends Pessoa {
 		super(nome, saldo_conta);
 		this.CNPJ = CNPJ;
 	}
+	public Vendedor(String nome, String CNPJ){
+		super(nome);
+		this.CNPJ = CNPJ;
+	}
 	
 	//Setters
 	public void setVendas_realizada(double valor){
@@ -72,7 +76,7 @@ public class Vendedor extends Pessoa {
 	//Menu de cadastramento
 	public Vendedor cadastrar() {
 		Scanner entrada = new Scanner(System.in);
-		System.out.println("#\nCADASTRAMENTO DE VENDEDOR");
+		System.out.println("\n#CADASTRAMENTO DE VENDEDOR");
 		System.out.println("NOME: ");
 		String nome_aux = entrada.nextLine();
 		System.out.println("CNPJ: ");
