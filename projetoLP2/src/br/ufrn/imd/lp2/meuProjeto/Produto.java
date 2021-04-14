@@ -1,45 +1,46 @@
 package br.ufrn.imd.lp2.meuProjeto;
 
-import java.util.Scanner;
-
 public class Produto {
+	
+	//ATRIBUTOS
+	private String ID;
 	private String nome;
 	private double preco_unitario;
+	private String data_validade;
 	
-	public Produto() {} //Construtor padrao
-	public Produto( String nome, double preco_unitario) { //Construtor parametrizado
+	//CONSTRUTOR PADRAO
+	public Produto() {} 
+	
+	//CONSTRUTOR PARAMETRIZADO
+	public Produto(String ID, String nome, double preco_unitario, String data_validade) {
+	    this.ID = ID;
 		this.nome = nome;
 		this.preco_unitario = preco_unitario;
+		this.data_validade = data_validade;
 	}
 	
 	//Setters
 	//----
 	
 	//Getters
+	public String getID() {
+		return ID;
+	}
 	public String getNome() {
 		return nome;
 	}
 	public double getPreco_unitario() {
 		return preco_unitario;
 	}
-	//INICIO Metodos auxiliares
-	//Metodo para mostrar informaçoes
-	public String toString() { 
-		String retorno = "Nome: " + this.nome;
+	public String getData_Validade() {
+		return data_validade;
+	}
+	
+	//METODOS AUXILIARES
+	public String toString() { //metodo para mostrar informacoes
+		String retorno = "ID: " + this.ID;
+		retorno += "Nome: " + this.nome;
 		retorno += "\nPreco Unitario: R$" + this.preco_unitario;
 		return retorno;
 	}
-	
-	public Produto cadastrar() {
-		Scanner entrada_produto = new Scanner(System.in);
-		System.out.println("CADASTRAMENTO DE PRODUTO");
-		System.out.println("NOME: ");
-		nome = entrada_produto.nextLine();
-		System.out.println("PRECO UNITARIO: ");
-		preco_unitario = entrada_produto.nextDouble();
-		
-		Produto novo_produto = new Produto(nome, preco_unitario);
-		return novo_produto;
-	}
-	
 }

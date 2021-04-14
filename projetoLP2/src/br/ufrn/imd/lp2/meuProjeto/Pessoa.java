@@ -1,17 +1,19 @@
 package br.ufrn.imd.lp2.meuProjeto;
 
+//CLASSE ABSTRATA PESSOA
 public class Pessoa {
+	
+	//ATRIBUTOS
 	protected String nome;
 	protected double saldo_conta;
 	
-	public Pessoa() {} //Construtor padrao
-	public Pessoa(String nome, double saldo_conta) { //Construtor parametrizado
+	//CONSTRUTOR PADRAO
+	public Pessoa() {}
+	
+	//CONSTRUTOR PARAMETRIZADO
+	public Pessoa(String nome, double saldo_conta) {
 		this.nome = nome;
 		this.saldo_conta = saldo_conta;
-	}
-	public Pessoa(String nome){
-		this.nome = nome;
-		this.saldo_conta = 0;
 	}
 	
 	//Setters
@@ -27,4 +29,5 @@ public class Pessoa {
 	public Double getSaldo() {
 		return saldo_conta;
 	}
+	
 }
