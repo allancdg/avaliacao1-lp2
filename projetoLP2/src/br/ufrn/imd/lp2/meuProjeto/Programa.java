@@ -43,13 +43,13 @@ public class Programa {
 		//CONJUNTOS DE OBJETOS
 		Comprador andre = new Comprador("ANDRE TRIGUEIRO", "111.222.333-44", 10000.00);
 		Vendedor allan = new Vendedor("ALLAN CHRISTIAN", "12.345.678/0001-00", 20000.00);
-		Produto teste = new Produto(0, "TESTE", 1000.00);
+		Produto saida = new Produto(0, "BOTAO DE SAIDA", 00.00); //este objeto não é utilizado, medida provisoria
 		Produto tv_teste = new Produto(1, "TV TELINHA", 1000.00);
 		
 		//INSERCAO DE OBJETOS PARA TESTES
 		compradores.add(andre);
 		vendedores.add(allan);
-		allan.addProduto(teste);
+		allan.addProduto(saida);
 		allan.addProduto(tv_teste);
 	}
 
@@ -62,10 +62,9 @@ public class Programa {
 			//MENU ESPECIFICO DE COMPRADORES
 			System.out.println("\n->> MENU PRINCIPAL COMPRADORES");					
 			System.out.println("1 - CADASTRAR NOVO COMPRADOR");
-			System.out.println("2 - APAGAR COMPRADOR");
-			System.out.println("3 - LISTAR TODOS OS COMPRADORES");
-			System.out.println("4 - BUSCAR E ACESSAR POR CPF");
-			System.out.println("5 - VOLTAR");
+			System.out.println("2 - LISTAR TODOS OS COMPRADORES");
+			System.out.println("3 - BUSCAR E ACESSAR POR CPF");
+			System.out.println("4 - VOLTAR");
 			System.out.println("DIGITE A OPCAO DESEJADA: ");
 			entrada_int_compradores = Integer.parseInt(entrada.nextLine());
 			
@@ -99,30 +98,8 @@ public class Programa {
 				}
 			}
 			
-			//OPCAO 02 - APAGAR COMPRADOR JA CADASTRADO
-			else if(entrada_int_compradores == 2){
-				System.out.println("EM DESENVOLVIMENTO");
-//				//LISTA DE COMPRADORES
-//				System.out.println("LISTAGEM DE COMPRADORES CADASTRADOS: ");
-//				for(Comprador comprador_aux : compradores){
-//					System.out.println(comprador_aux.toString());
-//					System.out.println(" ");
-//				}
-//				//ESCOLHENDO COMPRADOR A SER DELETADO
-//				System.out.println("DIGITE O CPF DO COMPRADOR A APAGAR: ");
-//				String entrada_CPF_comprador = entrada.nextLine();	
-//				//PERCORRENDO COMPRADORES ATÃ‰ ACHAR O SELECIONADO			
-//				for(Comprador comprador_aux : compradores){
-//					if(comprador_aux.getCPF().equals(entrada_CPF_comprador)){
-//						System.out.println(comprador_aux.toString());
-//						compradores.remove(comprador_aux);
-//						System.out.println("Comprador deletado!");
-//					}
-//				}						
-			}
-			
 			//OPCAO 03 - LISTAR TODOS OS COMPRADORES
-			else if(entrada_int_compradores == 3){
+			else if(entrada_int_compradores == 2){
 				System.out.println("LISTAGEM DE COMPRADORES CADASTRADOS: ");
 				for(Comprador comprador_aux : compradores){
 					System.out.println(comprador_aux.toString() + "\n");
@@ -130,7 +107,7 @@ public class Programa {
 			}
 			
 			//OPCAO 04 - BUSCAR E ACESSAR POR CPF
-			else if(entrada_int_compradores == 4){
+			else if(entrada_int_compradores == 3){
 				System.out.println("FORMATO DE BUSCA -> 123.456.789-00 ");
 				System.out.println("DIGITE O CPF QUE DESEJA BUSCAR: ");
 				String entrada_string_compradores;
@@ -150,9 +127,11 @@ public class Programa {
 					System.out.println("Este CPF nao foi encontrado.");
 				}
 			}
-			else if(entrada_int_compradores == 5){ }
+			else if(entrada_int_compradores == 4){
+				System.out.println("RETORNANDO AO MENU PRINCIPAL!");
+			}
 			else {System.out.println("OPCAO INVALIDA! ");}
-		} while (entrada_int_compradores != 5);		//FIM DO MENU SECUNDARIOS DE COMPRADORES	
+		} while (entrada_int_compradores != 4);		//FIM DO MENU SECUNDARIOS DE COMPRADORES	
 	}
 	
 	//SUBMENU DE COMPRADORES
@@ -183,7 +162,13 @@ public class Programa {
 			for(double compras: comprador.getCompras_realizadas()){
 				System.out.println("R$" + compras);
 			}
-		}		
+		}
+		else if(opcao == 4) {
+			System.out.println("RETORNANDO AO MENU PRINCIPAL!");
+		}
+		else {
+			System.out.println("OPCAO INVALIDA! ");
+		}
 	}
 
 	
@@ -195,10 +180,9 @@ public class Programa {
 		do {
 			System.out.println("\n->> MENU PRINCIPAL VENDEDORES");					
 			System.out.println("1 - CADASTRAR NOVO VENDEDOR");
-			System.out.println("2 - APAGAR VENDEDOR");
-			System.out.println("3 - LISTAR TODOS OS VENDEDORES");
-			System.out.println("4 - BUSCAR E ACESSAR POR CNPJ");
-			System.out.println("5 - VOLTAR");
+			System.out.println("2 - LISTAR TODOS OS VENDEDORES");
+			System.out.println("3 - BUSCAR E ACESSAR POR CNPJ");
+			System.out.println("4 - VOLTAR");
 			System.out.println("DIGITE A OPCAO DESEJADA: ");
 			entrada_int_vendedores = Integer.parseInt(entrada.nextLine());
 			
@@ -230,20 +214,16 @@ public class Programa {
 					vendedores.add(vendedor);
 				}
 			}
-			//OPCAO 2 - APAGAR VENDEDOR
-			else if(entrada_int_vendedores == 2){ 
-				System.out.println("OPCAO EM DESENVOLVIMENTO"); 
-			}
-			//OPCAO 3 - LISTAR TODOS OS VENDEDORES
-			else if(entrada_int_vendedores == 3){
+			//OPCAO 2 - LISTAR TODOS OS VENDEDORES
+			else if(entrada_int_vendedores == 2){
 				System.out.println("LISTAGEM DE VENDEDORES CADASTRADOS: ");
 				for(Vendedor vendedor_aux : vendedores){
 					System.out.println(vendedor_aux.toString());
 					System.out.println(" ");
 				}
 			}
-			//OPCAO 4 - BUSCAR E ACESSAR POR CNPJ
-			else if(entrada_int_vendedores == 4){
+			//OPCAO 3 - BUSCAR E ACESSAR POR CNPJ
+			else if(entrada_int_vendedores == 3){
 				System.out.println("FORMATO DE BUSCA -> 12.345.678/0001-00 ");
 				System.out.println("DIGITE O CNPJ QUE DESEJA BUSCAR: ");
 				String entrada_string_vendedores;
@@ -262,9 +242,13 @@ public class Programa {
 					System.out.println("Este CNPJ nao foi encontrado.");
 				}
 			}
-			//OPCAO 5 - VOLTAR
-			else if(entrada_int_vendedores == 5){ }
-			else {System.out.println("OPCAO INVALIDA! ");}
+			//OPCAO 4 - VOLTAR
+			else if(entrada_int_vendedores == 4){ 
+				System.out.println("RETORNANDO AO MENU PRINCIPAL! ");
+			}
+			else {
+				System.out.println("OPCAO INVALIDA! ");
+			}
 		}while(entrada_int_vendedores != 5);
 	}
 	
@@ -545,13 +529,31 @@ public class Programa {
 			}
 		} while(pagando);
 	}
+
 	
+	
+	//OPÇOES DO MENU PRINCIPAL
+	public void escolheOPcao(OpcoesMenu opcao) {
+		if(opcao == OpcoesMenu.COMPRADORES) {
+			menuCompradores();
+		}
+		else if(opcao == OpcoesMenu.VENDEDORES) {
+			menuVendedores();
+		}
+		else if(opcao == OpcoesMenu.COMPRAVENDA) {
+			menuCompraVenda();
+		}
+		else {
+			System.out.println("OPÇAO INVALIDA!" + "\n");
+		}
+	}
+
 	//MENUS PRINCIPAL
 	public void menus() {
 		
 	    //INTRODUÇAO
 		System.out.println("SEJA BEM VINDO! - " + formattedDate + "\n");
-
+		
 		//INICIANDO O MENU PRINCIPAL
 		int entrada_int_main = 0;	//Variavel responsavel por receber a opcao do Menu Principal
 		do {
@@ -564,19 +566,20 @@ public class Programa {
 			System.out.println("DIGITE A OPCAO DESEJADA: ");
 			entrada_int_main = Integer.parseInt(entrada.nextLine());
 			
+			
 			//MENU SECUNDARIO - COMPRADORES
 			if(entrada_int_main == 1) {	
-				menuCompradores();
+				escolheOPcao(OpcoesMenu.COMPRADORES);
 			}
 			
 			//MENU SECUNDARIO - VENDEDORES
 			else if (entrada_int_main == 2) {
-				menuVendedores();
+				escolheOPcao(OpcoesMenu.VENDEDORES);
 			}
 			
 			//MENU SECUNDARIO - COMPRA/VENDA
 			else if (entrada_int_main == 3) {
-				menuCompraVenda();
+				escolheOPcao(OpcoesMenu.COMPRAVENDA);
 			}
 			
 		} while (entrada_int_main != 0); // FIM DO MENU PRINCIPAL	
