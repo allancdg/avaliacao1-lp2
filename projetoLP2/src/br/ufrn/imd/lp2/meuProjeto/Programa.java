@@ -13,6 +13,17 @@ public class Programa {
 	//INICIANDO O SCANNER
 	Scanner entrada = new Scanner(System.in);
 	
+	//INICIALIZANDO UM OBJETO DATA
+	LocalDateTime myDateObj = LocalDateTime.now();
+    
+	//DATA E HORA PARA APRESENTAÇAO
+	DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    String formattedDate = myDateObj.format(myFormatObj);
+   
+    //DATA PARA SER UTILIZADO NA VALIDADE DO BOLETO
+	DateTimeFormatter apenasData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	String dataFormatada = myDateObj.format(apenasData);
+    
 	//COLECOES DE OBJETOS PRINCIPAIS
 	private Set<Comprador> compradores;					
 	private Set<Vendedor> vendedores;
@@ -29,11 +40,17 @@ public class Programa {
 	
 	//FUNÇAO PARA INSERIR OBJETOS NOS SETS
 	public void inicializador() {
-		//INSERCAO DE OBJETOS PARA TESTES
+		//CONJUNTOS DE OBJETOS
 		Comprador andre = new Comprador("ANDRE TRIGUEIRO", "111.222.333-44", 10000.00);
 		Vendedor allan = new Vendedor("ALLAN CHRISTIAN", "12.345.678/0001-00", 20000.00);
+		Produto teste = new Produto(0, "TESTE", 1000.00);
+		Produto tv_teste = new Produto(1, "TV TELINHA", 1000.00);
+		
+		//INSERCAO DE OBJETOS PARA TESTES
 		compradores.add(andre);
 		vendedores.add(allan);
+		allan.addProduto(teste);
+		allan.addProduto(tv_teste);
 	}
 
 	
@@ -313,18 +330,14 @@ public class Programa {
 	
 	
 	//CADASTRO DE PRODUTOS
-	private Produto cadastrarProduto(int ID) {
-		String ID_aux = Integer.toString(ID);
-		
+	private Produto cadastrarProduto(int ID) {		
 		System.out.println("CADASTRAMENTO DE PRODUTO");
 		System.out.println("NOME: ");
 		String nome_aux = entrada.nextLine();
 		System.out.println("PRECO UNITARIO: ");
 		double preco_unitario_aux = Double.parseDouble(entrada.nextLine());
-		System.out.println("DATA DE VALIDADE NO FORMATO 'dd/MM/yyyy HH:mm:ss': ");
-		String data_validade_aux = entrada.nextLine();
 
-		Produto novo_produto = new Produto(ID_aux, nome_aux, preco_unitario_aux, data_validade_aux);
+		Produto novo_produto = new Produto(ID, nome_aux, preco_unitario_aux);
 		return novo_produto;
 	}
 	
@@ -334,10 +347,13 @@ public class Programa {
 	private void menuCompraVenda() {
 		String entrada_string_venda_vendedor;
 		String entrada_string_compra_comprador;
-		int entrada_int_menu_pagamento = 0;
+		//int entrada_int_menu_pagamento = 0;
 		int entrada_int_simnao = 0;
 		int entrada_int_simnao_v = 0;
 
+		double valor_total = 0;
+		boolean comprando = true;
+		int opcao_comprando = 0;
 
 		Comprador comprador_venda = new Comprador();
 		Vendedor vendedor_venda = new Vendedor();
@@ -418,25 +434,26 @@ public class Programa {
 			System.out.println("OPÇAO NAO ENCONTRADA!");
 			return;
 		}
-	
+		
+		//COMPRADOR E VENDEDOR SELECIONADOS
 		System.out.println("REALIZANDO VENDA ENTRE:"
-						+ "\nCOMPRADOR: " + comprador_venda.getNome() + "SALDO: R$" + comprador_venda.getSaldo()
+						+ "\nCOMPRADOR: " + comprador_venda.getNome() 
+						+ "\tSALDO: R$" + comprador_venda.getSaldo()
 						+ "\nVENDEDOR: " + vendedor_venda.getNome());
 		
 		System.out.println(">> CATALOGO DE PRODUTOS <<");
 		for (Produto produto_aux : vendedor_venda.getCatalogo_produtos()) {
 			System.out.println(produto_aux.toString());
 		}
+
 		
 		List<Produto> carrinho = new ArrayList<Produto>();
-		double valor_total = 0;
-		boolean comprando = true;
-		int opcao_comprando = 0;
-
+		List<Produto> lista_produto_aux = new ArrayList<Produto>();
+		Produto produto_selecionado = new Produto();
+		
 		// COMEÇO DO PROCESSO DE VENDA
 		do{	
-			
-			System.out.println("\n[PRESSIONE 0 QUANDO ENCESSAR AS COMPRAS]: "
+			System.out.println("\n[PRESSIONE 0 QUANDO ENCESSAR AS COMPRAS]"
 							 + "\nDIGITE O ID DO PRODUTO:");
 			opcao_comprando = Integer.parseInt(entrada.nextLine());
 			
@@ -446,13 +463,20 @@ public class Programa {
 				quantidade = Integer.parseInt(entrada.nextLine());
 				
 				for( int i = 0 ; i < quantidade ; i++) {
-					carrinho.add(vendedor_venda.getCatalogo_produtos().get(opcao_comprando));
-					valor_total += vendedor_venda.getCatalogo_produtos().get(opcao_comprando).getPreco_unitario();
+					lista_produto_aux = vendedor_venda.getCatalogo_produtos();
+
+					produto_selecionado = lista_produto_aux.get(opcao_comprando);
+					
+					carrinho.add(produto_selecionado);
+
+					valor_total += produto_selecionado.getPreco_unitario();
+					
+					vendedor_venda.setVendas_realizada(valor_total);	//Armazena o valor da venda no vendedor
+					comprador_venda.setCompras_realizadas(valor_total);	//Armazena o valor da venda no comprador
 				}
 			}
 			else { 
-				vendedor_venda.setVendas_realizada(valor_total);	//Armazena o valor da venda no vendedor
-				comprador_venda.setCompras_realizadas(valor_total);	//Armazena o valor da venda no comprador
+				System.out.println("OPÇAO NAO ENCONTRADA!");
 				comprando = false;
 			}
 		} while(comprando);
@@ -464,30 +488,75 @@ public class Programa {
 			System.out.println(produto_aux.toString());
 		}
 		System.out.println("\nVALOR FINAL: R$" + valor_total + "\n\n\n");
-	}
+		
+		//FORMA DE PAGAMENTO
+		System.out.println("\n\n\t\t>>> PAGAMENTO <<<");
+		
+		//MENU PAGAMENTO
+		System.out.println("ESCOLHA UMA FORMA DE PAGAMENTO: ");
+		System.out.println("1 - PIX");
+		System.out.println("2 - BOLETO");
+		System.out.println("3 - DEBITO");
+		System.out.println("4 - CREDITO");
+		System.out.println("0 - CANCELAR TRANSAÇAO E VOLTAR AO MENU ANTERIOR");
 
-	
-	
-	public enum Pagamento {
-		PIX, BOLETO, CREDITO, DEBITO;
-	}
-	
+		int entrada_int_pagamento = 0;
+		boolean pagando = true;
+		
+		entrada_int_pagamento = Integer.parseInt(entrada.nextLine());
 
+		do {
+			if(entrada_int_pagamento == 1) {
+				Pix pagamento_pix = new Pix();
+				pagamento_pix.pagamento(vendedor_venda, comprador_venda, valor_total);
+				pagando = false;
+			}
+			else if(entrada_int_pagamento == 2) {
+				Boleto pagamento_boleto = new Boleto();
+				String data_vendedor;
+				
+				System.out.println("VENDEDOR > INSIRA A DATA DO BOLETO NO FORMATO dd/mm/aaaa: ");
+				data_vendedor = entrada.nextLine();
+				
+				if (pagamento_boleto.vencimento(dataFormatada, data_vendedor)) { 
+						pagamento_boleto.pagamento(vendedor_venda, comprador_venda, valor_total);
+						pagando = false;
+				}
+				else {
+					System.out.println("O BOLETO ESTÁ VENCIDO. ESCOLHA OUTRA FORMA DE PAGAMENTO!");
+				}
+			}
+			else if(entrada_int_pagamento == 3) {
+				Debito pagamento_debito = new Debito();
+				pagamento_debito.pagamento(vendedor_venda, comprador_venda, valor_total);
+				pagando = false;
+			}
+			else if(entrada_int_pagamento == 4) {
+				Credito pagamento_credito = new Credito();
+				pagamento_credito.pagamento(vendedor_venda, comprador_venda, valor_total);
+				pagando = false;
+			}
+			else if(entrada_int_pagamento == 0) {
+				System.out.println("CANCELANDO TRANSAÇAO!");
+				pagando = false;
+			}
+			else {
+				System.out.println("OPÇAO INVALIDA!");
+			}
+		} while(pagando);
+	}
 	
 	//MENUS PRINCIPAL
 	public void menus() {
 		
-		//INICIALIZANDO UM OBJETO DATA
-		LocalDateTime myDateObj = LocalDateTime.now();
-	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-	    String formattedDate = myDateObj.format(myFormatObj);
+	    //INTRODUÇAO
+		System.out.println("SEJA BEM VINDO! - " + formattedDate + "\n");
 
 		//INICIANDO O MENU PRINCIPAL
 		int entrada_int_main = 0;	//Variavel responsavel por receber a opcao do Menu Principal
 		do {
 			//MENU PRIMARIO - MENU PRINCIPAL
-			System.out.println("SEJA BEM VINDO! - " + formattedDate + "\n");
-			System.out.println("->> MENU PRINCIPAL");		
+			System.out.println("\n->> MENU PRINCIPAL");		
 			System.out.println("1 - COMPRADORES");
 			System.out.println("2 - VENDEDORES");
 			System.out.println("3 - COMPRA/VENDA");
@@ -514,5 +583,8 @@ public class Programa {
 
 		//FINALIZANDO O SCANNER
 		entrada.close();
+		
+	    //FINALIZAÇAO
+		System.out.println("\n\nOBRIGADO!");
 	}
 }

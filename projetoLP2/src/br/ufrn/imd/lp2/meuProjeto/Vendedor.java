@@ -23,6 +23,16 @@ public class Vendedor extends Pessoa {
 	}
 	
 	//Setters
+	public void setPagamentoVista (double valor, double taxa) {
+		valor = valor - (valor * taxa);
+		this.saldo_conta += valor;
+	}
+	
+	public void setPagamentoParcelado (double valor, double taxa) {
+		valor = valor - (valor * taxa);
+		this.valores_receber.add(valor);
+	}
+	
 	public void setVendas_realizada(double valor){
 		this.vendas_realizadas.add(valor);
 	}
@@ -31,8 +41,8 @@ public class Vendedor extends Pessoa {
 		this.valores_receber.add(valor);
 	}
 	
-	public void addProduto (Produto novo_produto) {
-		this.catalogo_produtos.add(novo_produto);
+	public void addProduto(Produto novo_produto) {
+		this.catalogo_produtos.add(novo_produto.getID(), novo_produto);
 	}
 	
 	//Getters

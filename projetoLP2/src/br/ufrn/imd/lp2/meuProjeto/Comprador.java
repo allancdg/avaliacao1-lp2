@@ -20,6 +20,10 @@ public class Comprador extends Pessoa {
 	}
 	
 	//Setters
+	public void setCompra(double valor) {
+		this.saldo_conta -= valor;
+	}
+	
 	public void setValores_pagar(double valor){
 		this.valores_pagar.add(valor);
 	}
